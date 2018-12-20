@@ -1,14 +1,13 @@
-![Gem Version](http://img.shields.io/gem/v/StreetAddress.svg)
-![Build Status](https://circleci.com/gh/derrek/street-address.svg?style=shield)
-
 # DESCRIPTION
   
 Parses a string returning a normalized Address object. When the string is not an US address it returns nil.
 
-This is a port of the perl module [Geo::StreetAddress::US](https://github.com/timbunce/Geo-StreetAddress-US) originally written by Schuyler D. Erle. 
+This is a port of the perl module [Geo::StreetAddress](https://github.com/timbunce/Geo-StreetAddress-US) originally written by Schuyler D. Erle. 
+This version was forked from https://github.com/street-address-rb/street-address
 
 ## Ruby Version
-StreetAddress::US version 2+ is designed to work with ruby 2+.  It may work with ruby 1.9.3, but will not work with ruby 1.8.x. If you need this to work pre ruby 2.0 please use gem version 1.0.6 or below.
+StreetAddress version 2+ is designed to work with ruby 2+.  It may work with ruby 1.9.3, but will not work with ruby 1.8.x. If you need this to work pre ruby 2.0 please use gem version 1.0.6 or below.
+Versions 3 is currently tested against ruby 2.4.1
 
 ## Installation
 
@@ -69,3 +68,4 @@ or from Gemfile
 The [MIT Licencse](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2007,2008,2009,2010,2011,2012,2013,2014,2015 Derrek Long and Contributors
+Copyright (c) 2018 ABODO and Contributors
