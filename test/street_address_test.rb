@@ -209,6 +209,10 @@ class StreetAddressTest < Minitest::Test
       state: "VA",
       postal_code: "22206",
       postal_code_ext: nil
+    },
+    "100 Broadway Downtown Milwaukee" => {
+      number: "100",
+      street: "Broadway"
     }
   }.freeze
 
