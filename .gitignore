@@ -3,9 +3,9 @@
 *.log
 .ruby-version
 .bundle
-Gemfile.lock
 .gem
 *.bak
 *~
 *.old
 *.tar.gz
+.idea/*
