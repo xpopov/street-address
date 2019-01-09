@@ -34,11 +34,11 @@ class StreetAddress::US::Address
   end
 
   def state_fips
-    return StreetAddress::FIPS_STATES[state]
+    return StreetAddress::US::FIPS_STATES[state]
   end
 
   def state_name
-    return StreetAddress::STATE_NAMES[state]&.capitalize
+    return StreetAddress::US::STATE_NAMES[state]&.capitalize
   end
 
   def intersection?
