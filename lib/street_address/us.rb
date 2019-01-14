@@ -365,7 +365,7 @@ class StreetAddress::US
       input["redundant_street_type"] = false
       if input["street"] && !input["street_type"]
         match = street_regexp.match(input["street"])
-        input["street_type"] = match["street_type"]
+        input["street_type"] = match["street_type"] if match
         input["redundant_street_type"] = true
       end
 
