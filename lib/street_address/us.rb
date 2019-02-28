@@ -126,7 +126,6 @@ class StreetAddress::US
       :street_type_regexp,
       :street_type_matches,
       :number_regexp,
-      :fraction_regexp,
       :state_regexp,
       :city_and_state_regexp,
       :direct_regexp,
@@ -152,7 +151,6 @@ class StreetAddress::US
   end
 
   self.street_type_regexp = Regexp.new(STREET_TYPES_LIST.keys.join("|"), Regexp::IGNORECASE)
-  self.fraction_regexp = %r{\d+\/\d+}
   self.state_regexp = Regexp.new(
     "\b" + STATE_CODES.flatten.map { |code| Regexp.quote(code) }.join("|") + "\b",
     Regexp::IGNORECASE
@@ -174,7 +172,7 @@ class StreetAddress::US
   # treat "42S" as "42 S" (42 South). For example,
   # Utah and Wisconsin have a more elaborate system of block numbering
   # http://en.wikipedia.org/wiki/House_number#Block_numbers
-  self.number_regexp = /(?<number>\d+-?\d*)(?=\D)/ix
+  self.number_regexp = /(?<number>\d+\s+\d+\/\d+|\d+-?\d*)(?=\D)/ix
 
   # note that expressions like [^,]+ may scan more than you expect
   self.street_regexp = /
@@ -247,7 +245,7 @@ class StreetAddress::US
         (?: (?:#{unit_prefix_numbered_regexp} \W*)
             | (?<unit_prefix> \#)\W*
         )
-        (?<unit> [\w-]+)
+        (?<unit> [\w\/-]+)
     )
     |
     #{unit_prefix_unnumbered_regexp}
@@ -268,7 +266,6 @@ class StreetAddress::US
     \A
     [^\w\x23]*    # skip non-word chars except # (eg unit)
     #{number_regexp} \W*
-    (?:#{fraction_regexp}\W*)?
     #{street_regexp}\W+
     (?:#{unit_regexp}\W+)?
     #{place_regexp}
@@ -284,7 +281,6 @@ class StreetAddress::US
     \s*         # skip leading whitespace
     (?:#{unit_regexp} #{sep_regexp})?
     (?:#{number_regexp})? \W*
-    (?:#{fraction_regexp} \W*)?
     #{street_regexp} #{sep_avoid_unit_regexp}
     (?:#{unit_regexp} #{sep_regexp})?
     (?:#{place_regexp})?
@@ -360,7 +356,7 @@ class StreetAddress::US
 
     def to_address(input, args)
       # strip off some punctuation and whitespace
-      input.each_pair { |key, value| input[key] = value.strip.gsub(/[^\w\s\-\#\&]/, "") }
+      input.each_pair { |key, value| input[key] = value.strip.gsub(/[^\w\s\-\#\&\/]/, "") }
 
       input["redundant_street_type"] = false
       if input["street"] && !input["street_type"]
