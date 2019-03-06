@@ -113,14 +113,23 @@ class StreetAddressTest < Minitest::Test
     "100 S.E. Washington Ave, Minneapolis, MN" => {
       number: "100", street: "Washington", state: "MN", city: "Minneapolis", street_type: "Ave", prefix: "SE"
     },
+    "8225 W 30 1/2 St, St Louis Park, MN" => {
+      number: "8225", street: "30 1/2", state: "MN", city: "St Louis Park", street_type: "St", prefix: "W"
+    },
     "3813 1/2 Some Road, Los Angeles, CA" => {
-      number: "3813", street: "Some", state: "CA", city: "Los Angeles", street_type: "Rd"
+      number: "3813 1/2", street: "Some", state: "CA", city: "Los Angeles", street_type: "Rd"
     },
     "1 First St, e San Jose CA" => { # lower case city direction
       number: "1", street: "First", state: "CA", city: "East San Jose", street_type: "St"
     },
     "123 Maple Rochester, New York" => { # space in state name
       street_type: nil, number: "123", street: "Maple", state: "NY", city: "Rochester"
+    },
+    "123 31 1/2 st Rochester, New York" => {
+      street_type: "St", number: "123", street: "31 1/2", state: "NY", city: "Rochester"
+    },
+    "123 1/2 Dayton St Rochester, New York" => {
+      street_type: "St", number: "123 1/2", street: "Dayton", state: "NY", city: "Rochester"
     },
     "233 S Wacker Dr 60606-6306" => { # zip+4 with hyphen
       number: "233", street: "Wacker", postal_code: "60606", postal_code_ext: "6306", street_type: "Dr", prefix: "S"
