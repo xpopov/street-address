@@ -145,6 +145,10 @@ class AddressTest < Minitest::Test
     "44 Canal Center Plaza Suite 500, Alexandria, VA 22314" => {
       line1: "44 Canal Center Plz Suite 500",
       line2: "Alexandria, VA 22314"
+    },
+    "205.5 6th St, Coralville, IA 52241" => {
+      line1: "205.5 6th St",
+      line2: "Coralville, IA 52241"
     }
   }.freeze
 
