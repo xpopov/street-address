@@ -356,7 +356,11 @@ class StreetAddress::US
 
     def to_address(input, args)
       # strip off some punctuation and whitespace
-      input.each_pair { |key, value| input[key] = value.strip.gsub(/[^\w\s\-\#\&\/]/, "") }
+      regexes = { number: /[^\w\s\-\#\&\/\.]/ }
+      input.each do |key, value|
+        regex = regexes.fetch(key.to_sym, /[^\w\s\-\#\&\/]/)
+        input[key] = value.strip.gsub(regex, "")
+      end
 
       input["redundant_street_type"] = false
       if input["street"] && !input["street_type"]
